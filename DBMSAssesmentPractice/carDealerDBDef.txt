@@ -1,0 +1,46 @@
+CREATE DATABASE carDealerDB;
+
+CREATE TABLE model (
+modelId INT AUTO_INCREMENT PRIMARY KEY,
+modelName VARCHAR(20)
+);
+
+CREATE TABLE make (
+makeId INT AUTO_INCREMENT PRIMARY KEY,
+makeName VARCHAR(20)
+);
+
+CREATE TABLE customer (
+customerId INT AUTO_INCREMENT PRIMARY KEY,
+userName VARCHAR(30) NOT NULL,
+passwordHash VARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE car (
+carId INT AUTO_INCREMENT PRIMARY KEY,
+carYear INT NOT NULL,
+carMake INT NOT NULL,
+carModel INT NOT NULL,
+customerId INT,
+FOREIGN KEY (carMake) REFERENCES make (makeId),
+FOREIGN KEY (carModel) REFERENCES model(modelId),
+FOREIGN KEY (customerId) REFERENCES customer (customerId)
+);
+
+CREATE TABLE salesRep (
+userId INT AUTO_INCREMENT PRIMARY KEY,
+userName VARCHAR(30),
+passwordHash VARCHAR(MAX)
+);
+
+CREATE TABLE offers (
+offerId INT AUTO_INCREMENT PRIMARY KEY,
+carId INT NOT NULL,
+downPayment INT NOT NULL,
+lengthOfLoan INT NOT NULL,
+isAccepted VARCHAR(5),
+salesRepId INT,
+FOREIGN KEY (carId) REFERENCES car (carId),
+FOREIGN KEY (salesRepId) REFERENCES salesRep(userId)
+);
+
