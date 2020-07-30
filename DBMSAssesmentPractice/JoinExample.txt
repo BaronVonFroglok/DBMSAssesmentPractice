@@ -1,0 +1,8 @@
+SELECT c.username,
+v.carYear
+m.makeName,
+a.modelName
+FROM Car AS v 
+INNER JOIN customer AS c ON v.customerId = 
+INNER JOIN make AS m ON m.makeId = v.makeId
+INNER JOIN model AS a ON a.modelId = v.modelId;
